@@ -1,0 +1,14 @@
+{
+  "name": "academic-tracker",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n backend,frontend -c blue,green \"cd backend && uvicorn app.main:app --reload --port 8000\" \"cd frontend && vite --port 5173\"",
+    "build": "cd frontend && npm run build",
+    "test": "cd backend && pytest",
+    "test:frontend": "cd frontend && npm run test",
+    "install:all": "cd backend && pip install -e . && cd ../frontend && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
