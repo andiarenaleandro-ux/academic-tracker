@@ -9,3 +9,17 @@ backend/alembic/versions/*.pyc
 .venv/
 *.egg-info/
 dist/
+
+# Artefactos de build PyInstaller
+build/
+
+# Cache TypeScript
+frontend/tsconfig.tsbuildinfo
+
+# Logs locales
+*.log
+
+# Archivos de trabajo interno
+PLAN.md
+ACADEMIC_TRACKER.MD
+Sin título.jpg
