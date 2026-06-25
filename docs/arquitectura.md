@@ -49,7 +49,6 @@ Academic_Tracker_ISSD/
 | `build_desktop.ps1` | Script PowerShell de build end-to-end: compila el frontend con Vite, luego empaqueta todo con PyInstaller generando `dist/AcademicTracker/AcademicTracker.exe` |
 | `academic-tracker.spec` | Configuración de PyInstaller: define qué archivos incluir en el bundle (`frontend/dist/`, `alembic/`), el entry point (`backend/desktop.py`) y el modo `--onedir` |
 | `assets/icon.ico` | Ícono del ejecutable de Windows |
-| `CLAUDE.md` | Instrucciones y contexto para Claude Code al trabajar en este repositorio |
 
 ---
 
