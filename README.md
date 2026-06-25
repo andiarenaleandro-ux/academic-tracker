@@ -6,6 +6,15 @@ Desarrollada para la Lic. en Ciencia de Datos e IA (ISSD), pero funciona con cua
 
 ---
 
+## Capturas
+
+<p align="center">
+  <img src="assets/screenshots/home.png" width="49%" alt="Pantalla de inicio" />
+  <img src="assets/screenshots/dashboard.png" width="49%" alt="Dashboard" />
+</p>
+
+---
+
 ## Características
 
 - **Dashboard** con avance de carrera, promedios ponderados y próximas evaluaciones
