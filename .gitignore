@@ -20,6 +20,7 @@ frontend/tsconfig.tsbuildinfo
 *.log
 
 # Archivos de trabajo interno
+CLAUDE.md
 PLAN.md
 ACADEMIC_TRACKER.MD
 Sin título.jpg
