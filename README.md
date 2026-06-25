@@ -1,8 +1,13 @@
 # Academic Tracker
 
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![GitHub release](https://img.shields.io/github/v/release/andiarenaleandro-ux/academic-tracker)](https://github.com/andiarenaleandro-ux/academic-tracker/releases/latest)
+
 Aplicación de escritorio para el seguimiento de carreras universitarias. Registrá tus materias, evaluaciones, asistencia y correlativas, y visualizá tu avance en un dashboard.
 
 Desarrollada para la Lic. en Ciencia de Datos e IA (ISSD), pero funciona con cualquier carrera.
+
+🔗 **https://github.com/andiarenaleandro-ux/academic-tracker**
 
 ---
 
