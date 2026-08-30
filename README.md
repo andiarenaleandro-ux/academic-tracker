@@ -3,7 +3,7 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![GitHub release](https://img.shields.io/github/v/release/andiarenaleandro-ux/academic-tracker)](https://github.com/andiarenaleandro-ux/academic-tracker/releases/latest)
 
-Aplicación de escritorio para el seguimiento de carreras universitarias. Registrá tus materias, evaluaciones, asistencia y correlativas, y visualizá tu avance en un dashboard.
+Aplicación de escritorio para el seguimiento de carreras universitarias. Registrá tus materias, evaluaciones, asistencia, correlativas y tareas, y visualizá tu avance en un dashboard general con un tracker de pendientes en el inicio.
 
 Desarrollada para la Lic. en Ciencia de Datos e IA (ISSD), pero funciona con cualquier carrera.
 
@@ -22,8 +22,11 @@ Desarrollada para la Lic. en Ciencia de Datos e IA (ISSD), pero funciona con cua
 
 ## Características
 
-- **Dashboard** con avance de carrera, promedios ponderados y próximas evaluaciones
-- **Gestión de materias** con estados (cursando, aprobada, recursando, libre, pendiente)
+- **Tracker de materias** (pantalla de inicio): avisos de tareas pendientes de tus materias en curso, con métricas de pendientes, vencidas, próximas y completadas
+- **Gestión de tareas por materia** con tipo, semana, prioridad y fecha límite
+- **Dashboard General** con avance de carrera, promedios ponderados y próximas evaluaciones
+- **Gestión de materias** con estados (cursando, aprobada, recursando, libre, pendiente), cada una con su color distintivo
+- **Filtros persistentes** por estado y semestre en la lista de materias (se mantienen al navegar)
 - **Evaluaciones** con peso configurable, notas reales y simuladas
 - **Cronograma semanal** de clases con vista de grilla
 - **Plan de estudios** con visualización de correlativas interactivas
@@ -131,13 +134,12 @@ Academic_Tracker_ISSD/
 │   │   └── main.py       ← app FastAPI
 │   ├── alembic/          ← migraciones de base de datos
 │   ├── tests/            ← pytest con SQLite en memoria
-│   └── desktop.py        ← entry point del ejecutable (uvicorn + pywebview)
-├── frontend/
+│   └── desktop.py        ← entry point del ejecutable (uvicorn + pywebview)├── frontend/
 │   └── src/
-│       ├── pages/        ← Dashboard, Materias, Evaluaciones, Cronograma, Plan...
-│       ├── hooks/        ← TanStack Query por recurso
-│       ├── components/   ← UI (Radix UI + Tailwind)
-│       └── lib/api.ts    ← cliente HTTP
+│       ├── pages/        ← Tracker, Dashboard, Materias, Evaluaciones, Cronograma, Plan...
+│       ├── hooks/        ← TanStack Query por recurso (materias, tareas, ...)
+│       ├── components/   ← UI (Radix UI + Tailwind) y paneles (tareas)
+│       └── lib/          ← cliente HTTP y utilidades (colores de materia)
 ├── docs/                 ← documentación completa del proyecto
 ├── assets/icon.ico
 ├── academic-tracker.spec ← configuración PyInstaller
