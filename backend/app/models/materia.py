@@ -21,6 +21,7 @@ class Materia(Base):
     clases: Mapped[list["Clase"]] = relationship(back_populates="materia", cascade="all, delete-orphan")
     config_asistencia: Mapped["ConfigAsistencia | None"] = relationship(back_populates="materia", uselist=False, cascade="all, delete-orphan")
     correlatividades: Mapped[list["Correlatividad"]] = relationship(back_populates="materia", foreign_keys="Correlatividad.materia_id", cascade="all, delete-orphan")
+    tareas: Mapped[list["Tarea"]] = relationship(back_populates="materia", cascade="all, delete-orphan")
 
     __table_args__ = (
         CheckConstraint("estado IN ('cursando', 'aprobada', 'recursando', 'libre', 'pendiente')", name="ck_materia_estado"),

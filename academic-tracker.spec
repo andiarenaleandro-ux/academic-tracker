@@ -36,6 +36,7 @@ a = Analysis(
         "app.api.cronograma",
         "app.api.analytics",
         "app.api.config_asistencia",
+        "app.api.tareas",
         "app.services",
         "app.services.base",
         "app.services.importer",

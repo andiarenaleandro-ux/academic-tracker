@@ -5,5 +5,6 @@ from app.models.evaluacion import Evaluacion
 from app.models.clase import Clase
 from app.models.config_asistencia import ConfigAsistencia
 from app.models.correlatividad import Correlatividad
+from app.models.tarea import Tarea
 
-__all__ = ["Carrera", "Semestre", "Materia", "Evaluacion", "Clase", "ConfigAsistencia", "Correlatividad"]
+__all__ = ["Carrera", "Semestre", "Materia", "Evaluacion", "Clase", "ConfigAsistencia", "Correlatividad", "Tarea"]

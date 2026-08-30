@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.api import carreras, semestres, materias, evaluaciones, clases, config_asistencia, importer, analytics, correlativas, cronograma, plan
+from app.api import carreras, semestres, materias, evaluaciones, clases, config_asistencia, importer, analytics, correlativas, cronograma, plan, tareas
 
 api_router = APIRouter()
 
@@ -10,6 +10,7 @@ api_router.include_router(materias.router, prefix="/materias", tags=["materias"]
 api_router.include_router(evaluaciones.router, prefix="/evaluaciones", tags=["evaluaciones"])
 api_router.include_router(clases.router, prefix="/clases", tags=["clases"])
 api_router.include_router(config_asistencia.router, prefix="/materias", tags=["asistencia"])
+api_router.include_router(tareas.router, prefix="/tareas", tags=["tareas"])
 api_router.include_router(importer.router, prefix="", tags=["import"])
 api_router.include_router(analytics.router, prefix="", tags=["analytics"])
 api_router.include_router(correlativas.router, prefix="", tags=["correlativas"])

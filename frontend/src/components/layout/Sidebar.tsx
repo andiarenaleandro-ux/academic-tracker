@@ -3,7 +3,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useCarreraContext, useDeleteCarrera } from "../../context/CarreraContext";
 
 const links = [
-  { to: "/dashboard", label: "Dashboard", icon: "◉" },
+  { to: "/tracker", label: "Tracker", icon: "☰" },
+  { to: "/dashboard", label: "Dashboard General", icon: "◉" },
   { to: "/materias", label: "Materias", icon: "▣" },
   { to: "/evaluaciones", label: "Evaluaciones", icon: "◎" },
   { to: "/cronograma", label: "Cronograma", icon: "◈" },
@@ -25,7 +26,7 @@ export function Sidebar() {
     const remaining = carreras.filter((c) => c.id !== carreraId);
     if (remaining.length > 0 && remaining[0]) {
       setCarreraId(remaining[0].id);
-      navigate("/dashboard");
+      navigate("/tracker");
     } else {
       navigate("/nueva-carrera");
     }
@@ -89,7 +90,9 @@ export function Sidebar() {
 
       <nav className="flex-1 px-3 py-4 space-y-1">
         {links.map(({ to, label, icon }) => {
-          const active = location.pathname.startsWith(to);
+          const active = to === "/tracker"
+            ? location.pathname === "/" || location.pathname.startsWith(to)
+            : location.pathname.startsWith(to);
           return (
             <Link
               key={to}
