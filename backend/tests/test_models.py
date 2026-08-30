@@ -10,6 +10,7 @@ from app.models import (
     Evaluacion,
     Clase,
     ConfigAsistencia,
+    Tarea,
 )
 
 
@@ -73,6 +74,17 @@ def test_create_full_hierarchy(db_session):
     db_session.add(config)
     db_session.commit()
 
+    tarea = Tarea(
+        materia_id=materia.id,
+        titulo="Teoría unidad 1",
+        tipo="teoria",
+        semana=1,
+        prioridad="media",
+        fecha_limite=date(2024, 3, 15),
+    )
+    db_session.add(tarea)
+    db_session.commit()
+
     assert materia.nombre == "Álgebra"
     assert materia.semestre.numero == 1
     assert materia.estado == "aprobada"
@@ -81,6 +93,34 @@ def test_create_full_hierarchy(db_session):
     assert materia.config_asistencia is not None
     assert materia.config_asistencia.asistencia_minima_pct == 75.0
     assert evaluacion.nota_obtenida == 7.0
+    assert len(materia.tareas) == 1
+    assert materia.tareas[0].titulo == "Teoría unidad 1"
+
+    db_session.delete(materia)
+    db_session.commit()
+    assert db_session.query(Tarea).count() == 0
+
+
+def test_tarea_invalid_tipo_raises(db_session):
+    c = Carrera(nombre="Carrera Test")
+    db_session.add(c)
+    db_session.commit()
+
+    s = Semestre(
+        carrera_id=c.id, numero=1, anio=2024,
+        fecha_inicio=date(2024, 3, 1), fecha_fin=date(2024, 7, 15),
+    )
+    db_session.add(s)
+    db_session.commit()
+
+    m = Materia(semestre_id=s.id, nombre="Test")
+    db_session.add(m)
+    db_session.commit()
+
+    t = Tarea(materia_id=m.id, titulo="X", tipo="invalido", semana=1, prioridad="media")
+    db_session.add(t)
+    with pytest.raises(IntegrityError):
+        db_session.commit()
 
 
 def test_materia_estado_check(db_session):

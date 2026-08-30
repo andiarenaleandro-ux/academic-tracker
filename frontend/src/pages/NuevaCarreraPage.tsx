@@ -94,7 +94,7 @@ export default function NuevaCarreraPage() {
       });
       await refetchCarreras();
       setCarreraId(res.carrera_id);
-      navigate("/dashboard");
+      navigate("/tracker");
     } catch (e) {
       setError(e instanceof Error ? e.message : "Error al crear la carrera");
     } finally {

@@ -117,7 +117,7 @@ export default function DashboardPage() {
   if (isLoading || carreraId === null) {
     return (
       <div className="p-8">
-        <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
+        <h1 className="text-2xl font-bold mb-6">Dashboard General</h1>
         <p className="text-zinc-500">Cargando...</p>
       </div>
     );
@@ -126,7 +126,7 @@ export default function DashboardPage() {
   if (error) {
     return (
       <div className="p-8">
-        <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
+        <h1 className="text-2xl font-bold mb-6">Dashboard General</h1>
         <p className="text-red-400">Error al cargar datos: {error?.toString()}</p>
       </div>
     );
@@ -135,7 +135,7 @@ export default function DashboardPage() {
   if (!data || data.total_materias === 0) {
     return (
       <div className="p-8">
-        <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
+        <h1 className="text-2xl font-bold mb-6">Dashboard General</h1>
         <div className="flex flex-col items-center justify-center py-24 text-center space-y-4">
           <p className="text-zinc-400 text-lg">No hay materias cargadas para esta carrera.</p>
         </div>
@@ -145,7 +145,7 @@ export default function DashboardPage() {
 
   return (
     <div className="p-8 space-y-6">
-      <h1 className="text-2xl font-bold">Dashboard</h1>
+      <h1 className="text-2xl font-bold">Dashboard General</h1>
 
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
         <AvanceCard aprobadas={data.aprobadas} total={data.total_materias} promedio={data.promedio_general_con_aplazos} />

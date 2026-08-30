@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from app.db import engine, Base
-from app.models import Carrera, Semestre, Materia, Evaluacion, Clase, ConfigAsistencia, Correlatividad
+from app.models import Carrera, Semestre, Materia, Evaluacion, Clase, ConfigAsistencia, Correlatividad, Tarea
 from app.api.router import api_router
 from app.config import get_frontend_dist_path
 

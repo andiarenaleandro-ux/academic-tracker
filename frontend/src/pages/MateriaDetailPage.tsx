@@ -12,6 +12,7 @@ import { Select } from "../components/ui/select";
 import { Dialog, DialogHeader } from "../components/ui/dialog";
 import { Table, THead, TBody, Th, Td } from "../components/ui/table";
 import { Tabs } from "../components/ui/tabs";
+import { TareasPanel } from "../components/tareas/TareasPanel";
 
 const DIAS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
@@ -154,6 +155,7 @@ export default function MateriaDetailPage() {
 
       <Tabs value={tab} onChange={setTab} tabs={[
         { key: "evaluaciones", label: "Evaluaciones" },
+        { key: "tareas", label: "Tareas" },
         { key: "horarios", label: "Horarios" },
       ]} />
 
@@ -244,6 +246,10 @@ export default function MateriaDetailPage() {
             </div>
           </Dialog>
         </div>
+      )}
+
+      {tab === "tareas" && (
+        <TareasPanel materiaId={materiaId} />
       )}
 
       {tab === "horarios" && (

@@ -178,3 +178,50 @@ class TestConfigAsistencia:
     def test_get_not_found(self, client):
         resp = client.get("/api/materias/999/asistencia")
         assert resp.status_code == 404
+
+
+class TestTareas:
+    def _setup(self, client):
+        c = client.post("/api/carreras", json={"nombre": "C"}).json()
+        s = client.post("/api/semestres", json={
+            "carrera_id": c["id"], "numero": 1, "anio": 2024,
+            "fecha_inicio": "2024-03-01", "fecha_fin": "2024-07-15",
+        }).json()
+        m = client.post("/api/materias", json={"semestre_id": s["id"], "nombre": "M"}).json()
+        return c, s, m
+
+    def test_create_list_and_update(self, client):
+        _, _, m = self._setup(client)
+        resp = client.post("/api/tareas", json={
+            "materia_id": m["id"], "titulo": "Teoría unidad 1",
+            "tipo": "teoria", "semana": 1, "prioridad": "alta",
+            "fecha_limite": "2024-03-10",
+        })
+        assert resp.status_code == 201
+        tarea = resp.json()
+        assert tarea["completado"] is False
+
+        resp = client.patch(f"/api/tareas/{tarea['id']}", json={"completado": True})
+        assert resp.json()["completado"] is True
+
+        resp = client.get("/api/tareas", params={"materia_id": m["id"]})
+        assert len(resp.json()) == 1
+        assert resp.json()[0]["titulo"] == "Teoría unidad 1"
+
+    def test_invalid_tipo_rejected(self, client):
+        _, _, m = self._setup(client)
+        resp = client.post("/api/tareas", json={
+            "materia_id": m["id"], "titulo": "X", "tipo": "invalido", "semana": 1,
+        })
+        assert resp.status_code == 422
+
+    def test_delete(self, client):
+        _, _, m = self._setup(client)
+        resp = client.post("/api/tareas", json={
+            "materia_id": m["id"], "titulo": "TP 1", "tipo": "tp", "semana": 2,
+        })
+        tid = resp.json()["id"]
+        resp = client.delete(f"/api/tareas/{tid}")
+        assert resp.status_code == 204
+        resp = client.get("/api/tareas", params={"materia_id": m["id"]})
+        assert len(resp.json()) == 0
