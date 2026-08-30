@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useCarreraContext } from "../context/CarreraContext";
 import { useMaterias, type Materia } from "../hooks/useMaterias";
 import { useTareas, useUpdateTarea, type Tarea } from "../hooks/useTareas";
+import { materiaColor } from "../lib/materiaColor";
 
 const tipoLabels: Record<string, string> = {
   teoria: "Teoría",
@@ -158,9 +159,12 @@ export default function TrackerPage() {
             return (
               <div key={m.id} className={`rounded-lg border ${pendientesMateria.some((t) => dueState(t, today, week) === "vencida") ? "border-red-800/50" : "border-zinc-800"} bg-zinc-900`}>
                 <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800">
-                  <Link to={`/materias/${m.id}`} className="font-semibold hover:text-violet-300">
-                    {m.nombre}
-                  </Link>
+                  <span className="flex items-center gap-2">
+                    <span className={`h-2.5 w-2.5 rounded-full ${materiaColor(m.nombre).dot} flex-shrink-0`} />
+                    <Link to={`/materias/${m.id}`} className={`font-semibold hover:underline ${materiaColor(m.nombre).text}`}>
+                      {m.nombre}
+                    </Link>
+                  </span>
                   <span className="text-xs text-zinc-500">
                     {pendientesMateria.length} pendientes · {completadasMateria.length} completadas
                   </span>
