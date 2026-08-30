@@ -32,9 +32,39 @@ const estadoLabels: Record<string, string> = {
 
 const estados = ["cursando", "aprobada", "recursando", "libre", "pendiente"];
 
+const FILTROS_KEY = "materias:filtros";
+
+function loadFiltros(): { estado: string; semestre: string } {
+  try {
+    const raw = sessionStorage.getItem(FILTROS_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      return {
+        estado: typeof parsed.estado === "string" ? parsed.estado : "",
+        semestre: typeof parsed.semestre === "string" ? parsed.semestre : "",
+      };
+    }
+  } catch {
+    // ignore
+  }
+  return { estado: "", semestre: "" };
+}
+
 export default function MateriasPage() {
-  const [filtroEstado, setFiltroEstado] = useState("");
-  const [filtroSemestre, setFiltroSemestre] = useState("");
+  const [filtros, setFiltros] = useState(loadFiltros);
+  const setFiltro = (key: "estado" | "semestre", value: string) => {
+    setFiltros((prev) => {
+      const next = { ...prev, [key]: value };
+      try {
+        sessionStorage.setItem(FILTROS_KEY, JSON.stringify(next));
+      } catch {
+        // ignore
+      }
+      return next;
+    });
+  };
+  const filtroEstado = filtros.estado;
+  const filtroSemestre = filtros.semestre;
   const [showCreate, setShowCreate] = useState(false);
   const [form, setForm] = useState({ semestre_id: 0, nombre: "", codigo: "", profesor: "", estado: "cursando" });
 
@@ -89,7 +119,7 @@ export default function MateriasPage() {
         <CardContent className="flex gap-4 py-4">
           <div className="w-48">
             <Label>Semestre</Label>
-            <Select value={filtroSemestre} onChange={(e) => setFiltroSemestre(e.target.value)}>
+            <Select value={filtroSemestre} onChange={(e) => setFiltro("semestre", e.target.value)}>
               <option value="">Todos</option>
               {semestres?.map((s) => (
                 <option key={s.id} value={s.id}>S{s.numero} - {s.anio}</option>
@@ -98,7 +128,7 @@ export default function MateriasPage() {
           </div>
           <div className="w-40">
             <Label>Estado</Label>
-            <Select value={filtroEstado} onChange={(e) => setFiltroEstado(e.target.value)}>
+            <Select value={filtroEstado} onChange={(e) => setFiltro("estado", e.target.value)}>
               <option value="">Todos</option>
               {estados.map((e) => <option key={e} value={e}>{e}</option>)}
             </Select>
